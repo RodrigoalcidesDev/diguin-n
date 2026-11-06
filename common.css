@@ -1,0 +1,64 @@
+/* base compartilhada pelas telas de cada rede */
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html { background: #0b0714; }
+body {
+  min-height: 100vh; min-height: 100dvh;
+  font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: #fff;
+  background: var(--page-bg, #120c20);
+  background-attachment: fixed;
+  display: flex; justify-content: center;
+  overflow-x: hidden;
+}
+main {
+  width: 100%; max-width: 520px;
+  padding: max(18px, env(safe-area-inset-top)) 18px max(36px, env(safe-area-inset-bottom));
+  display: flex; flex-direction: column; gap: 26px;
+}
+a { color: inherit; }
+.back {
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none; font-weight: 800; font-size: 15px;
+  padding: 8px 14px; border-radius: 99px;
+  background: #ffffff14; border: 1px solid #ffffff22;
+}
+.back:hover, .back:focus-visible { background: #ffffff26; outline: none; }
+
+.head { display: flex; align-items: flex-end; gap: 14px; }
+.head img {
+  height: 150px; width: auto; flex: none;
+  filter: drop-shadow(0 0 16px var(--glow, #b084f099)) drop-shadow(0 8px 14px #0007);
+  animation: float 4.5s ease-in-out infinite;
+}
+.head h1 {
+  font-family: "Anton", Impact, sans-serif; font-weight: 400;
+  font-size: clamp(40px, 12vw, 54px); line-height: 1;
+}
+.head p { font-weight: 700; font-size: 15px; opacity: .85; margin-top: 6px; }
+@keyframes float { 50% { transform: translateY(-6px); } }
+
+.cta {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  text-decoration: none; font-weight: 800; font-size: 19px;
+  padding: 16px 20px; border-radius: 20px;
+  transition: transform .15s ease, box-shadow .2s ease;
+}
+.cta:hover, .cta:focus-visible { transform: translateY(-3px) scale(1.02); outline: none; }
+.cta:active { transform: scale(.97); }
+.cta svg { width: 26px; height: 26px; fill: currentColor; }
+.cta-row { display: grid; gap: 12px; }
+
+section h2 {
+  font-family: "Anton", Impact, sans-serif; font-weight: 400;
+  font-size: 26px; letter-spacing: .02em; margin-bottom: 12px;
+}
+.frame { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #000; }
+.frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+footer { text-align: center; font-size: 13px; opacity: .55; }
+
+@media (prefers-reduced-motion: reduce) {
+  .head img { animation: none; }
+  .cta { transition: none; }
+}

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diguin_n · YouTube</title>
+<meta name="theme-color" content="#1a0a0f">
+<link rel="icon" href="img/normal.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  :root {
+    --page-bg:
+      radial-gradient(700px 420px at 50% 0%, #ff2d2d33, transparent 70%),
+      linear-gradient(180deg, #2a0d14 0%, #12080c 55%, #0d0709 100%);
+    --glow: #ff4d4d99;
+    --red: #ff2d2d;
+  }
+  h1 { text-shadow: 3px 4px 0 #b80f0f; }
+  .cta.sub { background: linear-gradient(135deg, #ff3b3b, #b80f0f); box-shadow: 0 10px 30px -10px #ff2d2dcc; font-size: 21px; }
+  .cta.sec { background: #ffffff12; border: 1px solid #ffffff2a; font-size: 16px; padding: 13px; }
+  section h2 { border-left: 5px solid var(--red); padding-left: 10px; }
+
+  .vlist { display: grid; gap: 14px; }
+  .vcard { display: grid; grid-template-columns: 148px 1fr; gap: 12px; text-decoration: none; align-items: center;
+           background: #ffffff0d; border: 1px solid #ffffff14; border-radius: 16px; padding: 8px; transition: transform .15s, border-color .15s; }
+  .vcard:hover, .vcard:focus-visible { transform: translateY(-2px); border-color: var(--red); outline: none; }
+  .vcard .th { position: relative; aspect-ratio: 16/9; border-radius: 10px; overflow: hidden; background: #000; }
+  .vcard .th img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vcard .th::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 60%, #0008); }
+  .vcard b { font-size: 15px; line-height: 1.3; font-weight: 800; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+  .pls { display: grid; gap: 10px; }
+  .pl { display: flex; align-items: center; gap: 14px; text-decoration: none; font-weight: 800; font-size: 17px;
+        padding: 16px; border-radius: 16px; background: linear-gradient(135deg, #ffffff12, #ffffff06); border: 1px solid #ffffff1c; transition: transform .15s, border-color .15s; }
+  .pl:hover, .pl:focus-visible { transform: translateX(4px); border-color: var(--red); outline: none; }
+  .pl i { flex: none; width: 40px; height: 40px; border-radius: 12px; background: var(--red); display: grid; place-items: center; }
+  .pl i svg { width: 22px; height: 22px; fill: #fff; }
+  .pl span { flex: 1; }
+  .pl em { font-style: normal; opacity: .6; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Início</a>
+
+  <div class="head">
+    <img src="img/caneca.webp" alt="Avatar Diguin_n com uma caneca">
+    <div>
+      <h1>YouTube</h1>
+      <p>Histórias de jogos e guias completos</p>
+    </div>
+  </div>
+
+  <div class="cta-row">
+    <a class="cta sub" id="sub" target="_blank" rel="noopener">Inscreva-se</a>
+    <a class="cta sec" id="open" target="_blank" rel="noopener">Abrir o canal</a>
+  </div>
+
+  <section>
+    <h2>Último vídeo longo</h2>
+    <div class="frame">
+      <iframe id="latest" title="Último vídeo do canal" loading="lazy" allowfullscreen
+              allow="accelerometer; encrypted-media; picture-in-picture; fullscreen"></iframe>
+    </div>
+  </section>
+
+  <section>
+    <h2>Vídeos recentes</h2>
+    <div class="vlist" id="videos"></div>
+  </section>
+
+  <section>
+    <h2>Playlists por jogo</h2>
+    <div class="pls" id="pls"></div>
+  </section>
+
+  <footer>n_n</footer>
+</main>
+
+<script src="site.js"></script>
+<script>
+  document.querySelector(".cta.sub").innerHTML = ICON.youtube + " Inscreva-se";
+  document.getElementById("sub").href = `https://www.youtube.com/channel/${SITE.channelId}?sub_confirmation=1`;
+  document.getElementById("open").href = SITE.links.youtube;
+
+  // "UULF" + id do canal sem o "UC" = só vídeos longos, do mais novo para o mais antigo
+  document.getElementById("latest").src =
+    "https://www.youtube-nocookie.com/embed/videoseries?list=UULF" + SITE.channelId.slice(2);
+
+  SITE.ready.then(() => {
+    document.getElementById("videos").innerHTML = SITE.videos.map(v => `
+      <a class="vcard" href="${ytWatch(v.id)}" target="_blank" rel="noopener">
+        <div class="th"><img src="${thumb(v.id)}" alt="" loading="lazy"></div>
+        <b>${esc(v.title)}</b>
+      </a>`).join("");
+  });
+
+  document.getElementById("pls").innerHTML = SITE.playlists.map(p => `
+    <a class="pl" href="${ytPlaylist(p.id)}" target="_blank" rel="noopener">
+      <i>${ICON.play}</i><span>${esc(p.title)}</span><em>→</em>
+    </a>`).join("");
+</script>
+</body>
+</html>

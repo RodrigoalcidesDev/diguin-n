@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diguin_n · Instagram</title>
+<meta name="theme-color" content="#1a0f2e">
+<link rel="icon" href="img/normal.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  :root {
+    --page-bg:
+      radial-gradient(600px 420px at 85% 0%, #d6297655, transparent 70%),
+      radial-gradient(600px 420px at 10% 10%, #fa7e1e33, transparent 70%),
+      linear-gradient(180deg, #2a1245 0%, #150a26 60%, #0f0819 100%);
+    --glow: #e1306cb0;
+    --ig: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  }
+  h1 { background: var(--ig); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(2px 3px 0 #0006); }
+  .cta { background: var(--ig); color: #fff; box-shadow: 0 10px 30px -10px #d62976cc; text-shadow: 0 1px 4px #0006; }
+  section h2 { display: inline-block; background: var(--ig); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .reel { position: relative; display: block; aspect-ratio: 9 / 16; overflow: hidden; background: #111; text-decoration: none; }
+  .reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .25s; }
+  .reel:hover img, .reel:focus-visible img { transform: scale(1.06); }
+  .reel:focus-visible { outline: 3px solid #fff; outline-offset: -3px; }
+  .reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 60%, #000a); }
+  .reel .ic { position: absolute; z-index: 1; top: 8px; right: 8px; width: 22px; height: 22px; fill: #fff; filter: drop-shadow(0 1px 3px #0008); }
+  .reel .t { position: absolute; z-index: 1; left: 8px; right: 8px; bottom: 8px; font-weight: 800; font-size: 12px; line-height: 1.2;
+             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .note { margin-top: 14px; font-size: 14px; opacity: .7; text-align: center; font-weight: 700; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Início</a>
+
+  <div class="head">
+    <img src="img/acenando.webp" alt="Avatar Diguin_n acenando">
+    <div>
+      <h1>Instagram</h1>
+      <p>Reels com os melhores momentos</p>
+    </div>
+  </div>
+
+  <a class="cta" id="follow" target="_blank" rel="noopener">Seguir no Instagram</a>
+
+  <section>
+    <h2>Reels</h2>
+    <div class="grid" id="grid"></div>
+    <p class="note">Veja todos os Reels no perfil ↑</p>
+  </section>
+
+  <footer>n_n</footer>
+</main>
+
+<script src="site.js"></script>
+<script>
+  const url = SITE.links.instagram;
+  document.getElementById("follow").href = url;
+  // ícone de Reels (clapperboard simplificado)
+  const reelIcon = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5A2.5 2.5 0 0 1 5.5 3h13A2.5 2.5 0 0 1 21 5.5v13a2.5 2.5 0 0 1-2.5 2.5h-13A2.5 2.5 0 0 1 3 18.5v-13zm6.4 3.2v6.6l5.6-3.3-5.6-3.3z"/></svg>';
+  SITE.ready.then(() => {
+    document.getElementById("grid").innerHTML = SITE.shorts.map(s => `
+      <a class="reel" href="${url}" target="_blank" rel="noopener">
+        <img src="${thumb(s.id)}" alt="" loading="lazy">
+        ${reelIcon}
+        <span class="t">${esc(s.title)}</span>
+      </a>`).join("");
+  });
+</script>
+</body>
+</html>

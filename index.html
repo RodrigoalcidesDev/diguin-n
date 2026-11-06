@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diguin_n · links</title>
+<meta name="description" content="Histórias de jogos e dicas pra jogar melhor. YouTube, Twitch, TikTok e Instagram do Diguin_n.">
+<meta name="theme-color" content="#120c20">
+<meta property="og:title" content="DIGUIN_N">
+<meta property="og:description" content="Histórias de jogos e dicas pra jogar melhor.">
+<meta property="og:image" content="img/caneca.webp">
+<link rel="icon" href="img/normal.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #120c20;
+    --bg-2: #2a1a4d;
+    --lilac: #e2d4ff;
+    --purple: #b084f0;
+    --white: #fff;
+    --radius: 22px;
+    --yt: #ff2d2d;
+    --twitch: #9146ff;
+    --tiktok-a: #25f4ee;
+    --tiktok-b: #fe2c55;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+  html { background: var(--bg); }
+  body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+    color: var(--white);
+    background:
+      radial-gradient(900px 600px at 50% 18%, #54309a55 0%, transparent 70%),
+      linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 70%);
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    overflow-x: hidden;
+    position: relative;
+  }
+  /* faint n_n pattern, same as the banner */
+  body::before {
+    content: "";
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='260' height='170'><text x='20' y='60' font-family='Verdana,sans-serif' font-size='34' fill='%23b084f0' fill-opacity='0.07'>n_n</text><text x='150' y='145' font-family='Verdana,sans-serif' font-size='34' fill='%23b084f0' fill-opacity='0.07'>n_n</text></svg>");
+    pointer-events: none;
+  }
+  main {
+    position: relative;
+    width: 100%;
+    max-width: 460px;
+    padding: max(28px, env(safe-area-inset-top)) 20px max(32px, env(safe-area-inset-bottom));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 22px;
+  }
+
+  /* ---------- avatar ---------- */
+  .stage {
+    position: relative;
+    width: min(78vw, 330px);
+    height: min(46vh, 380px);
+    margin-top: 6px;
+    animation: float 4.5s ease-in-out infinite;
+  }
+  .stage::before {                       /* glow behind the avatar */
+    content: "";
+    position: absolute; inset: 8% 4% 0;
+    background: radial-gradient(closest-side, #b084f066, transparent 75%);
+    filter: blur(14px);
+    transition: background .3s;
+  }
+  .pose {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: contain;
+    object-position: center bottom;
+    opacity: 0;
+    transform: scale(.94) translateY(6px);
+    transition: opacity .18s ease, transform .22s cubic-bezier(.3,1.6,.5,1);
+    filter: drop-shadow(0 0 18px #b084f088) drop-shadow(0 10px 18px #0007);
+    user-select: none; -webkit-user-drag: none;
+    pointer-events: none;
+  }
+  .pose.on { opacity: 1; transform: none; }
+  @keyframes float { 50% { transform: translateY(-8px); } }
+
+  /* ---------- title ---------- */
+  h1 {
+    font-family: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+    font-weight: 400;
+    font-size: clamp(52px, 17vw, 76px);
+    line-height: 1;
+    letter-spacing: .01em;
+    text-shadow: 4px 5px 0 #7846dc;
+    margin-top: -6px;
+  }
+  .tagline {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--lilac);
+    text-align: center;
+    margin-top: -12px;
+    line-height: 1.35;
+  }
+
+  /* ---------- buttons ---------- */
+  .links {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 6px;
+  }
+  .btn {
+    --c1: var(--purple); --c2: var(--purple);
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--white);
+    font-weight: 800;
+    font-size: 16px;
+    border-radius: var(--radius);
+    border: 2px solid #ffffff1c;
+    background:
+      linear-gradient(#1a1130e6, #1a1130e6) padding-box,
+      linear-gradient(135deg, var(--c1), var(--c2)) border-box;
+    border-color: transparent;
+    padding: 16px 8px;
+    min-height: 92px;
+    flex-direction: column;
+    transition: transform .15s ease, box-shadow .2s ease;
+    outline: none;
+  }
+  .btn svg { width: 30px; height: 30px; fill: currentColor; flex: none; }
+  .btn:hover, .btn:focus-visible, .btn.active {
+    transform: translateY(-4px) scale(1.03);
+    box-shadow: 0 10px 28px -6px var(--c1);
+  }
+  .btn:active { transform: scale(.97); }
+  .btn:focus-visible { outline: 3px solid var(--white); outline-offset: 3px; }
+
+  .btn.yt {
+    --c1: #ff3b3b; --c2: #b80f0f;
+    grid-column: 1 / -1;
+    flex-direction: row;
+    min-height: 84px;
+    font-size: 22px;
+    background:
+      linear-gradient(135deg, #ff3b3b, #b80f0f) padding-box,
+      linear-gradient(135deg, #ff9a9a, #ff3b3b) border-box;
+    box-shadow: 0 8px 30px -10px #ff2d2d99;
+  }
+  .btn.yt svg { width: 38px; height: 38px; }
+  .btn.yt small { display: block; font-size: 13px; font-weight: 700; opacity: .88; }
+  .btn.twitch { --c1: #b88cff; --c2: #6a2fd6; }
+  .btn.tiktok { --c1: var(--tiktok-a); --c2: var(--tiktok-b); }
+  .btn.insta  { --c1: #feda75; --c2: #d62976; }
+  .btn.insta { background:
+      linear-gradient(#1a1130e6, #1a1130e6) padding-box,
+      linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5) border-box; }
+
+  footer { font-size: 13px; color: #b9a6e0aa; margin-top: 4px; }
+
+  @media (min-width: 700px) {
+    main { max-width: 520px; }
+    .stage { height: min(48vh, 420px); width: 360px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .stage { animation: none; }
+    .pose, .btn { transition: none; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <div class="stage" id="stage" aria-hidden="true">
+    <!-- poses; the first one is the default -->
+    <img class="pose on" data-pose="normal"            src="img/normal.webp"            alt="">
+    <img class="pose"    data-pose="caneca" src="img/caneca.webp" alt="">
+    <img class="pose"    data-pose="animado"           src="img/animado.webp"           alt="">
+    <img class="pose"    data-pose="polegar_cima"      src="img/polegar_cima.webp"      alt="">
+    <img class="pose"    data-pose="acenando"          src="img/acenando.webp"          alt="">
+  </div>
+
+  <h1>DIGUIN_N</h1>
+  <p class="tagline">Histórias de jogos e dicas pra jogar melhor</p>
+
+  <nav class="links" aria-label="Minhas redes">
+    <a class="btn yt" href="youtube.html" data-pose="caneca">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1c.5-1.9.5-5.8.5-5.8s0-3.9-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+      <span>YouTube<small>vídeos e histórias completas</small></span>
+    </a>
+
+    <a class="btn twitch" href="twitch.html" data-pose="animado">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.6 11.2h1.8V6h-1.8v5.2zm4.9 0h1.8V6h-1.8v5.2zM5 1 1.5 4.5v15H6V23h2.6l3.5-3.5h4.1l6.3-6.3V1H5zm14.5 11.3-3.5 3.5h-4.9l-3.1 3.1v-3.1H6.5V2.8h13v9.5z"/></svg>
+      Twitch
+    </a>
+
+    <a class="btn tiktok" href="tiktok.html" data-pose="polegar_cima">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 2h-3.2v13.3a2.9 2.9 0 1 1-2.9-2.9c.3 0 .6 0 .9.1V9.2a6.1 6.1 0 1 0 5.2 6V8.7a7.3 7.3 0 0 0 4.3 1.4V6.9a4.3 4.3 0 0 1-4.3-4.9z"/></svg>
+      TikTok
+    </a>
+
+    <a class="btn insta" href="instagram.html" data-pose="acenando">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.2c3.2 0 3.6 0 4.8.1 3.3.1 4.8 1.7 4.9 4.9.1 1.3.1 1.6.1 4.8s0 3.6-.1 4.8c-.1 3.2-1.7 4.8-4.9 4.9-1.3.1-1.6.1-4.8.1s-3.6 0-4.8-.1c-3.3-.1-4.8-1.7-4.9-4.9C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.8C2.4 3.9 4 2.4 7.2 2.3c1.2-.1 1.6-.1 4.8-.1zM12 0C8.7 0 8.3 0 7.1.1 2.7.3.3 2.7.1 7.1 0 8.3 0 8.7 0 12s0 3.7.1 4.9c.2 4.4 2.6 6.8 7 7 1.2.1 1.6.1 4.9.1s3.7 0 4.9-.1c4.4-.2 6.8-2.6 7-7 .1-1.2.1-1.6.1-4.9s0-3.7-.1-4.9c-.2-4.4-2.6-6.8-7-7C15.7 0 15.3 0 12 0zm0 5.8a6.2 6.2 0 1 0 0 12.4 6.2 6.2 0 0 0 0-12.4zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.4-11.8a1.4 1.4 0 1 0 0 2.9 1.4 1.4 0 0 0 0-2.9z"/></svg>
+      Instagram
+    </a>
+  </nav>
+
+  <footer>n_n</footer>
+</main>
+
+<script>
+  /* avatar changes pose on hover / focus / touch */
+  const poses = [...document.querySelectorAll(".pose")];
+  const byName = Object.fromEntries(poses.map(p => [p.dataset.pose, p]));
+  let current = "normal";
+  function setPose(name) {
+    if (!byName[name] || name === current) return;
+    byName[current].classList.remove("on");
+    byName[name].classList.add("on");
+    current = name;
+  }
+  document.querySelectorAll(".btn").forEach(btn => {
+    const on  = () => { btn.classList.add("active");    setPose(btn.dataset.pose); };
+    const off = () => { btn.classList.remove("active"); setPose("normal"); };
+    btn.addEventListener("pointerenter", on);
+    btn.addEventListener("pointerleave", off);
+    btn.addEventListener("pointerdown", on);
+    btn.addEventListener("focus", on);
+    btn.addEventListener("blur", off);
+  });
+  /* if the tab comes back from a link, reset the avatar */
+  addEventListener("pageshow", () => setPose("normal"));
+</script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Diguin_n · Twitch</title>
+<meta name="theme-color" content="#0e0e10">
+<link rel="icon" href="img/normal.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Nunito:wght@700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="common.css">
+<style>
+  :root {
+    --page-bg:
+      radial-gradient(700px 420px at 50% 0%, #9146ff44, transparent 70%),
+      linear-gradient(180deg, #1c1033 0%, #0e0e10 60%);
+    --glow: #a970ffaa;
+    --tw: #9146ff;
+  }
+  h1 { text-shadow: 3px 4px 0 #5a24b8; }
+  .cta { background: linear-gradient(135deg, #a970ff, #6a2fd6); box-shadow: 0 10px 30px -10px #9146ffcc; }
+  section h2 { border-left: 5px solid var(--tw); padding-left: 10px; display: flex; align-items: center; gap: 10px; }
+
+  .badge { font-family: "Nunito", sans-serif; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+           padding: 3px 10px; border-radius: 99px; background: #ffffff1c; color: #d9c8ff; }
+  .badge.on  { background: #eb0400; color: #fff; animation: pulse 1.6s ease-in-out infinite; }
+  .badge.off { background: #ffffff1c; }
+  @keyframes pulse { 50% { box-shadow: 0 0 0 6px #eb040033; } }
+
+  .week { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+  .day { text-align: center; padding: 12px 0; border-radius: 12px; font-weight: 800; font-size: 14px;
+         background: #ffffff0d; border: 1px solid #ffffff14; color: #ffffff77; }
+  .day.live { background: linear-gradient(135deg, #a970ff, #6a2fd6); color: #fff; border-color: transparent; box-shadow: 0 6px 16px -6px #9146ff; }
+  .day.today { outline: 2px solid #fff; outline-offset: 2px; }
+  .when { margin-top: 12px; font-weight: 700; font-size: 16px; opacity: .92; text-align: center; }
+</style>
+</head>
+<body>
+<main>
+  <a class="back" href="index.html">← Início</a>
+
+  <div class="head">
+    <img src="img/animado.webp" alt="Avatar Diguin_n animado">
+    <div>
+      <h1>Twitch</h1>
+      <p>Lives de gameplay, quase todo dia</p>
+    </div>
+  </div>
+
+  <a class="cta" id="follow" target="_blank" rel="noopener">Seguir na Twitch</a>
+
+  <section>
+    <h2>Ao vivo <span class="badge" id="status">verificando…</span></h2>
+    <div class="frame"><iframe id="player" title="Live da Twitch" allowfullscreen></iframe></div>
+  </section>
+
+  <section>
+    <h2>Horários das lives</h2>
+    <div class="week" id="week"></div>
+    <p class="when" id="when"></p>
+  </section>
+
+  <footer>n_n</footer>
+</main>
+
+<script src="site.js"></script>
+<script>
+  const user = SITE.twitchUser;
+  document.getElementById("follow").href = SITE.links.twitch;
+
+  // o player da Twitch exige o domínio onde a página está hospedada
+  document.getElementById("player").src =
+    `https://player.twitch.tv/?channel=${user}&parent=${location.hostname}&muted=true&autoplay=false`;
+
+  // semana
+  const names = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sáb"];
+  const today = new Date().getDay();
+  const lives = SITE.schedule.dias;
+  document.getElementById("week").innerHTML = names.map((n, i) =>
+    `<div class="day${lives.includes(i) ? " live" : ""}${i === today ? " today" : ""}">${n}</div>`).join("");
+  const when = document.getElementById("when");
+  if (lives.length) {
+    when.textContent = [SITE.schedule.hora && "às " + SITE.schedule.hora, SITE.schedule.jogo].filter(Boolean).join(" · ");
+  } else {
+    when.textContent = "Em breve: os dias e horários das lives";
+  }
+
+  // ao vivo? (serviço público decapi.me, devolve texto simples)
+  const badge = document.getElementById("status");
+  fetch(`https://decapi.me/twitch/uptime/${user}`)
+    .then(r => r.text())
+    .then(t => {
+      if (/offline/i.test(t)) { badge.textContent = "OFFLINE"; badge.className = "badge off"; }
+      else if (/not found|does not exist|error/i.test(t)) { badge.textContent = ""; badge.hidden = true; }
+      else { badge.textContent = "AO VIVO"; badge.className = "badge on"; }
+    })
+    .catch(() => { badge.hidden = true; });
+</script>
+</body>
+</html>
