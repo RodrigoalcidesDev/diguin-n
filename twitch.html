@@ -81,7 +81,7 @@
     `<div class="day${lives.includes(i) ? " live" : ""}${i === today ? " today" : ""}">${n}</div>`).join("");
   const when = document.getElementById("when");
   if (lives.length) {
-    when.textContent = [SITE.schedule.hora && "às " + SITE.schedule.hora, SITE.schedule.jogo].filter(Boolean).join(" · ");
+    when.textContent = [SITE.schedule.hora && "das " + SITE.schedule.hora, SITE.schedule.jogo].filter(Boolean).join(" · ");
   } else {
     when.textContent = "Em breve: os dias e horários das lives";
   }
