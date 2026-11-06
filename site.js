@@ -9,15 +9,15 @@ const SITE = {
     youtube:   "https://www.youtube.com/@diguin_n",
     twitch:    "https://www.twitch.tv/diguin_n",
     tiktok:    "https://www.tiktok.com/@diguin_n",
-    instagram: "https://www.instagram.com/diguin_n"      // CONFIRMAR o usuário
+    instagram: "https://www.instagram.com/diguin_n.lives/"
   },
 
   // usuário na Twitch (também usado no player e no "ao vivo")
   twitchUser: "diguin_n",
 
-  // Horários das lives. Deixe "dias" vazio até definir.
+  // Horários das lives.
   // dias: 0 = Dom, 1 = Seg, 2 = Ter, 3 = Qua, 4 = Qui, 5 = Sex, 6 = Sáb
-  schedule: { dias: [], hora: "", jogo: "" },
+  schedule: { dias: [1, 2, 3, 4, 5], hora: "19h às 22h", jogo: "" },
 
   // Vídeos longos recentes (id do YouTube + título)
   videos: [
